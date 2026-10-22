@@ -1,0 +1,706 @@
+/* ==========================================================================
+   Note-y - Sticky Note Gallery
+   Styles: Realistic Corkboard, Wooden Frame & Authentic Sticky Notes
+   ========================================================================== */
+
+/* --------------------------------------------------
+   CSS Variables & Design Tokens
+   -------------------------------------------------- */
+:root {
+  /* Color Palettes - Authentic Sticky Note Pastels */
+  --note-yellow-bg: #fff9a6;
+  --note-yellow-grad: linear-gradient(135deg, #fffbc7 0%, #ffea78 100%);
+  --note-yellow-shadow: rgba(220, 190, 40, 0.4);
+
+  --note-pink-bg: #ffd1dc;
+  --note-pink-grad: linear-gradient(135deg, #ffe4ec 0%, #ffb3c6 100%);
+  --note-pink-shadow: rgba(220, 100, 140, 0.35);
+
+  --note-blue-bg: #c7ebff;
+  --note-blue-grad: linear-gradient(135deg, #e0f4ff 0%, #a8dcff 100%);
+  --note-blue-shadow: rgba(70, 140, 200, 0.35);
+
+  --note-green-bg: #cbf5cf;
+  --note-green-grad: linear-gradient(135deg, #e3fde6 0%, #b0eeb7 100%);
+  --note-green-shadow: rgba(60, 170, 80, 0.35);
+
+  --note-purple-bg: #e6dbff;
+  --note-purple-grad: linear-gradient(135deg, #f1ebff 0%, #d4c2ff 100%);
+  --note-purple-shadow: rgba(140, 100, 210, 0.35);
+
+  --note-orange-bg: #ffe0c2;
+  --note-orange-grad: linear-gradient(135deg, #ffeedd 0%, #ffcaa0 100%);
+  --note-orange-shadow: rgba(220, 130, 50, 0.35);
+
+  /* Corkboard & Wood Colors */
+  --wood-outer: #4a2c16;
+  --wood-inner: #7b4a26;
+  --wood-bevel: #a66a3d;
+  --cork-base: #cfa772;
+  --cork-dark: #b68b55;
+
+  /* Fonts */
+  --font-ui: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-handwriting: 'Caveat', cursive, sans-serif;
+
+  /* Shadows */
+  --shadow-realistic: 0 10px 20px rgba(0, 0, 0, 0.15), 0 3px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lifted: 0 18px 30px rgba(0, 0, 0, 0.22), 0 8px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* --------------------------------------------------
+   Reset & Base Styles
+   -------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-ui);
+  min-height: 100vh;
+  background-color: #2b1f17;
+  /* Rich warm room backdrop */
+  background: radial-gradient(circle at 50% 30%, #3e2719 0%, #1a100b 100%);
+  color: #333333;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 24px 16px;
+  overflow-x: hidden;
+}
+
+/* --------------------------------------------------
+   Wooden Corkboard Frame & Realistic Surface
+   -------------------------------------------------- */
+.corkboard-frame {
+  width: 100%;
+  max-width: 1180px;
+  min-height: calc(100vh - 48px);
+  padding: 20px;
+  background: linear-gradient(135deg, var(--wood-inner) 0%, var(--wood-outer) 100%);
+  border-radius: 20px;
+  box-shadow:
+    0 25px 60px rgba(0, 0, 0, 0.65),
+    inset 0 2px 4px rgba(255, 255, 255, 0.25),
+    inset 0 -4px 8px rgba(0, 0, 0, 0.6);
+  border: 10px solid var(--wood-outer);
+  outline: 3px solid var(--wood-bevel);
+  position: relative;
+}
+
+/* Cork Texture using pure CSS gradients */
+.corkboard {
+  width: 100%;
+  min-height: calc(100vh - 88px);
+  border-radius: 12px;
+  background-color: var(--cork-base);
+  background-image:
+    radial-gradient(ellipse at center, rgba(255, 255, 255, 0.12) 0%, rgba(0, 0, 0, 0.22) 100%),
+    repeating-radial-gradient(circle at 17% 32%, var(--cork-dark), var(--cork-base) 1px, transparent 2px, transparent 15px),
+    repeating-radial-gradient(circle at 82% 65%, var(--cork-dark), var(--cork-base) 1px, transparent 2px, transparent 18px),
+    repeating-radial-gradient(circle at 45% 85%, var(--cork-dark), var(--cork-base) 1px, transparent 2px, transparent 20px);
+  box-shadow: inset 0 8px 24px rgba(0, 0, 0, 0.45);
+  padding: 36px 32px 48px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* --------------------------------------------------
+   Board Header
+   -------------------------------------------------- */
+.board-header {
+  position: relative;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  border-radius: 14px;
+  padding: 16px 28px;
+  margin: 0 auto 36px;
+  max-width: 680px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.header-content {
+  flex: 1;
+  min-width: 200px;
+}
+
+.app-title {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #2b1f17;
+  letter-spacing: -0.5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.pin-emoji {
+  display: inline-block;
+  transform: rotate(-15deg);
+  font-size: 2rem;
+}
+
+.app-subtitle {
+  font-size: 0.95rem;
+  color: #6d5843;
+  margin-top: 4px;
+  font-weight: 500;
+}
+
+.badge {
+  background: #2b1f17;
+  color: #fef9c3;
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 20px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  letter-spacing: 0.3px;
+}
+
+/* Push pins holding the header sign */
+.header-pin {
+  position: absolute;
+  top: -10px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #ff7675, #d63031 70%, #900 100%);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.35);
+}
+
+.header-pin-left {
+  left: 20px;
+}
+
+.header-pin-right {
+  right: 20px;
+}
+
+/* --------------------------------------------------
+   Central Creator Sticky Note
+   -------------------------------------------------- */
+.creator-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.sticky-note-creator {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  background: var(--note-yellow-grad);
+  border-radius: 4px;
+  padding: 28px 24px 20px;
+  box-shadow:
+    0 12px 24px rgba(0, 0, 0, 0.2),
+    0 4px 8px rgba(0, 0, 0, 0.12),
+    inset 0 -40px 40px -20px rgba(0, 0, 0, 0.04);
+  transition: transform 0.25s ease, background 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Push Pin on Top of Sticky Note */
+.pushpin {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  box-shadow: 0 5px 8px rgba(0, 0, 0, 0.35);
+  z-index: 10;
+}
+
+.pushpin::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 4px;
+  width: 6px;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+}
+
+.pushpin-red {
+  background: radial-gradient(circle at 35% 35%, #ff7675, #e74c3c 70%, #a82015 100%);
+}
+
+.pushpin-gold {
+  background: radial-gradient(circle at 35% 35%, #ffd32a, #f1c40f 70%, #b78a02 100%);
+}
+
+/* Color Picker Swatches */
+.color-picker-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px dashed rgba(0, 0, 0, 0.15);
+}
+
+.color-label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #4a4a4a;
+}
+
+.color-swatch-label {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.color-swatch-label input[type="radio"] {
+  display: none;
+}
+
+.swatch {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: inline-block;
+  border: 2px solid rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.color-swatch-label input[type="radio"]:checked + .swatch {
+  transform: scale(1.22);
+  border-color: #2b1f17;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.swatch-yellow { background-color: #fff176; }
+.swatch-pink   { background-color: #f48fb1; }
+.swatch-blue   { background-color: #81d4fa; }
+.swatch-green  { background-color: #a5d6a7; }
+.swatch-purple { background-color: #ce93d8; }
+.swatch-orange { background-color: #ffb74d; }
+
+/* Textarea & Handwriting Aesthetic */
+.textarea-wrapper {
+  position: relative;
+  margin-bottom: 16px;
+}
+
+.note-textarea {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  resize: vertical;
+  min-height: 120px;
+  font-family: var(--font-handwriting);
+  font-size: 1.6rem;
+  line-height: 1.4;
+  color: #2c2523;
+  padding: 4px 6px;
+}
+
+.note-textarea::placeholder {
+  color: rgba(44, 37, 35, 0.45);
+  font-family: var(--font-handwriting);
+  font-size: 1.5rem;
+}
+
+.textarea-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.78rem;
+  color: #63534b;
+  margin-top: 6px;
+  font-weight: 600;
+}
+
+.keyboard-tip {
+  font-size: 0.75rem;
+  opacity: 0.85;
+}
+
+.keyboard-tip kbd {
+  background: rgba(0, 0, 0, 0.08);
+  padding: 2px 5px;
+  border-radius: 4px;
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+}
+
+/* Action Buttons */
+.creator-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.btn {
+  font-family: var(--font-ui);
+  font-size: 0.9rem;
+  font-weight: 700;
+  padding: 10px 18px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.btn:active {
+  transform: scale(0.96);
+}
+
+.btn-secondary {
+  background: rgba(0, 0, 0, 0.07);
+  color: #4a3e36;
+}
+
+.btn-secondary:hover {
+  background: rgba(0, 0, 0, 0.14);
+}
+
+.btn-primary {
+  background: #2b1f17;
+  color: #ffffff;
+  box-shadow: 0 4px 10px rgba(43, 31, 23, 0.35);
+}
+
+.btn-primary:hover {
+  background: #422f23;
+  box-shadow: 0 6px 14px rgba(43, 31, 23, 0.45);
+  transform: translateY(-2px);
+}
+
+/* --------------------------------------------------
+   Corkboard Shelf Divider
+   -------------------------------------------------- */
+.board-divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 10px 0 32px;
+}
+
+.board-divider::before,
+.board-divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 2px dashed rgba(74, 44, 22, 0.4);
+}
+
+.divider-text {
+  padding: 0 16px;
+  font-weight: 800;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #4a2c16;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.3);
+}
+
+/* --------------------------------------------------
+   Sticky Notes Gallery Grid
+   -------------------------------------------------- */
+.gallery-section {
+  flex: 1;
+  position: relative;
+}
+
+.notes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 32px 24px;
+  padding: 8px 4px;
+}
+
+/* Realistic Saved Sticky Note Card */
+.sticky-note-card {
+  position: relative;
+  min-height: 220px;
+  padding: 26px 20px 16px;
+  border-radius: 3px;
+  box-shadow: var(--shadow-realistic);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  word-break: break-word;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease, z-index 0.25s;
+  animation: popIn 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  z-index: 1;
+}
+
+/* Paper peel curl effect on bottom corner */
+.sticky-note-card::after {
+  content: '';
+  position: absolute;
+  bottom: 6px;
+  right: 6px;
+  width: 30px;
+  height: 30px;
+  background: rgba(0, 0, 0, 0.08);
+  transform: rotate(45deg);
+  filter: blur(4px);
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Subtle realistic tilts for authentic gallery appearance */
+.sticky-note-card:nth-child(2n)   { transform: rotate(1.5deg); }
+.sticky-note-card:nth-child(3n)   { transform: rotate(-2deg); }
+.sticky-note-card:nth-child(4n)   { transform: rotate(2.5deg); }
+.sticky-note-card:nth-child(5n)   { transform: rotate(-1.5deg); }
+.sticky-note-card:nth-child(6n)   { transform: rotate(0.8deg); }
+
+.sticky-note-card:hover {
+  transform: scale(1.06) rotate(0deg) !important;
+  box-shadow: var(--shadow-lifted);
+  z-index: 20;
+}
+
+/* Individual Color Palettes for Cards */
+.sticky-note-card.note-yellow {
+  background: var(--note-yellow-grad);
+  border-bottom: 2px solid rgba(220, 190, 40, 0.3);
+}
+
+.sticky-note-card.note-pink {
+  background: var(--note-pink-grad);
+  border-bottom: 2px solid rgba(220, 100, 140, 0.3);
+}
+
+.sticky-note-card.note-blue {
+  background: var(--note-blue-grad);
+  border-bottom: 2px solid rgba(70, 140, 200, 0.3);
+}
+
+.sticky-note-card.note-green {
+  background: var(--note-green-grad);
+  border-bottom: 2px solid rgba(60, 170, 80, 0.3);
+}
+
+.sticky-note-card.note-purple {
+  background: var(--note-purple-grad);
+  border-bottom: 2px solid rgba(140, 100, 210, 0.3);
+}
+
+.sticky-note-card.note-orange {
+  background: var(--note-orange-grad);
+  border-bottom: 2px solid rgba(220, 130, 50, 0.3);
+}
+
+/* Card Push Pin */
+.card-pin {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.35);
+  z-index: 5;
+}
+
+.card-pin::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 3px;
+  width: 5px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+}
+
+.pin-red    { background: radial-gradient(circle at 35% 35%, #ff7675, #e74c3c 70%, #a82015 100%); }
+.pin-blue   { background: radial-gradient(circle at 35% 35%, #74b9ff, #0984e3 70%, #004b87 100%); }
+.pin-green  { background: radial-gradient(circle at 35% 35%, #55efc4, #00b894 70%, #006952 100%); }
+.pin-yellow { background: radial-gradient(circle at 35% 35%, #ffeaa7, #fdcb6e 70%, #b27e16 100%); }
+
+/* Delete Button on Note */
+.delete-note-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0, 0, 0, 0.12);
+  color: #333333;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.4;
+  transition: all 0.2s ease;
+}
+
+.sticky-note-card:hover .delete-note-btn {
+  opacity: 1;
+}
+
+.delete-note-btn:hover {
+  background: #e74c3c;
+  color: #ffffff;
+  transform: scale(1.15);
+}
+
+/* Card Note Text */
+.card-text {
+  font-family: var(--font-handwriting);
+  font-size: 1.55rem;
+  line-height: 1.35;
+  color: #27201e;
+  white-space: pre-wrap;
+  margin-bottom: 16px;
+}
+
+/* Card Date Meta Footer */
+.card-footer {
+  border-top: 1px dashed rgba(0, 0, 0, 0.14);
+  padding-top: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.78rem;
+  color: #55443c;
+  font-weight: 600;
+}
+
+.card-date {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* --------------------------------------------------
+   Empty State
+   -------------------------------------------------- */
+.empty-state {
+  display: flex;
+  justify-content: center;
+  padding: 40px 16px;
+}
+
+.empty-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.85);
+  border: 2px dashed rgba(74, 44, 22, 0.3);
+  border-radius: 12px;
+  padding: 32px 28px;
+  max-width: 420px;
+  text-align: center;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+}
+
+.empty-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #3e2719;
+  margin-bottom: 8px;
+}
+
+.empty-subtitle {
+  font-size: 0.9rem;
+  color: #6d5843;
+  line-height: 1.45;
+}
+
+/* --------------------------------------------------
+   Footer
+   -------------------------------------------------- */
+.board-footer {
+  text-align: center;
+  margin-top: 48px;
+  font-size: 0.82rem;
+  color: #4a2c16;
+  opacity: 0.8;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+/* --------------------------------------------------
+   Animations
+   -------------------------------------------------- */
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.6) translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.removing {
+  animation: popOut 0.28s ease forwards;
+}
+
+@keyframes popOut {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.6) translateY(20px);
+  }
+}
+
+/* --------------------------------------------------
+   Responsive Design
+   -------------------------------------------------- */
+@media (max-width: 768px) {
+  body {
+    padding: 12px 8px;
+  }
+
+  .corkboard-frame {
+    padding: 10px;
+    border-width: 6px;
+    border-radius: 14px;
+  }
+
+  .corkboard {
+    padding: 24px 16px 36px;
+  }
+
+  .board-header {
+    flex-direction: column;
+    padding: 16px;
+    text-align: center;
+  }
+
+  .app-title {
+    font-size: 1.8rem;
+  }
+
+  .notes-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .sticky-note-card:hover {
+    transform: scale(1.02) !important;
+  }
+}

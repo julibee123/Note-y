@@ -1,0 +1,22 @@
+{
+  "name": "note-y",
+  "version": "1.0.0",
+  "description": "Aesthetic Sticky Note Corkboard Gallery",
+  "main": "script.js",
+  "private": true,
+  "scripts": {
+    "lint": "eslint script.js",
+    "lint:fix": "eslint script.js --fix"
+  },
+  "keywords": [
+    "sticky-notes",
+    "gallery",
+    "github-pages",
+    "corkboard"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^8.57.0"
+  }
+}

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Note-y - A realistic, aesthetic sticky note corkboard gallery for your quick thoughts and reminders.">
+  <title>Note-y 📌 | Sticky Note Gallery</title>
+  
+  <!-- Google Fonts for realistic handwriting & clean modern UI -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Corkboard Frame Container -->
+  <div class="corkboard-frame">
+    <!-- Corkboard Surface -->
+    <main class="corkboard" id="corkboard">
+      
+      <!-- Board Header / Hanging Banner -->
+      <header class="board-header">
+        <div class="header-pin header-pin-left" aria-hidden="true"></div>
+        <div class="header-pin header-pin-right" aria-hidden="true"></div>
+        <div class="header-content">
+          <h1 class="app-title">
+            <span class="pin-emoji" aria-hidden="true">📌</span> Note-y
+          </h1>
+          <p class="app-subtitle">Pin your thoughts, keep your memories on the board</p>
+        </div>
+        <div class="board-stats">
+          <span id="note-count-badge" class="badge">0 Notes Pinned</span>
+        </div>
+      </header>
+
+      <!-- Central Creator Section -->
+      <section class="creator-container" aria-label="Create a new sticky note">
+        <div class="sticky-note-creator" id="creator-card">
+          <!-- Push Pin at top of creator note -->
+          <div class="pushpin pushpin-red" aria-hidden="true"></div>
+
+          <!-- Color Selector Swatches -->
+          <div class="color-picker-row" role="radiogroup" aria-label="Select sticky note color">
+            <span class="color-label">Color:</span>
+            <label class="color-swatch-label">
+              <input type="radio" name="note-color" value="yellow" checked id="color-yellow">
+              <span class="swatch swatch-yellow" title="Warm Yellow"></span>
+            </label>
+            <label class="color-swatch-label">
+              <input type="radio" name="note-color" value="pink" id="color-pink">
+              <span class="swatch swatch-pink" title="Soft Pink"></span>
+            </label>
+            <label class="color-swatch-label">
+              <input type="radio" name="note-color" value="blue" id="color-blue">
+              <span class="swatch swatch-blue" title="Sky Blue"></span>
+            </label>
+            <label class="color-swatch-label">
+              <input type="radio" name="note-color" value="green" id="color-green">
+              <span class="swatch swatch-green" title="Mint Green"></span>
+            </label>
+            <label class="color-swatch-label">
+              <input type="radio" name="note-color" value="purple" id="color-purple">
+              <span class="swatch swatch-purple" title="Lavender"></span>
+            </label>
+            <label class="color-swatch-label">
+              <input type="radio" name="note-color" value="orange" id="color-orange">
+              <span class="swatch swatch-orange" title="Pastel Peach"></span>
+            </label>
+          </div>
+
+          <!-- Textarea for Note Content -->
+          <div class="textarea-wrapper">
+            <textarea
+              id="note-input"
+              class="note-textarea"
+              placeholder="What's on your mind? Type a note here..."
+              rows="5"
+              maxlength="500"
+              aria-label="Sticky note message"
+            ></textarea>
+            <div class="textarea-footer">
+              <span id="char-counter" class="char-count">0 / 500</span>
+              <span class="keyboard-tip">Tip: Press <kbd>Ctrl</kbd> + <kbd>Enter</kbd> to save</span>
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="creator-actions">
+            <button type="button" id="clear-btn" class="btn btn-secondary">
+              <span class="btn-icon">↺</span> Clear
+            </button>
+            <button type="button" id="save-btn" class="btn btn-primary">
+              <span class="btn-icon">📌</span> Save to Board
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Corkboard Shelf Divider -->
+      <div class="board-divider" aria-hidden="true">
+        <span class="divider-text">Sticky Note Gallery</span>
+      </div>
+
+      <!-- Sticky Notes Gallery Grid -->
+      <section class="gallery-section" aria-label="Pinned notes gallery">
+        <div id="notes-gallery" class="notes-grid">
+          <!-- Dynamic sticky notes rendered via script.js -->
+        </div>
+
+        <!-- Empty State Message -->
+        <div id="empty-state" class="empty-state">
+          <div class="empty-card">
+            <div class="pushpin pushpin-gold" aria-hidden="true"></div>
+            <p class="empty-title">The board is waiting for your ideas!</p>
+            <p class="empty-subtitle">Type your first note above and click <strong>"Save to Board"</strong> to pin it here.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer Info -->
+      <footer class="board-footer">
+        <p>Built with pure HTML, CSS & JavaScript • Saved automatically to LocalStorage</p>
+      </footer>
+
+    </main>
+  </div>
+
+  <!-- JavaScript Application Logic -->
+  <script src="script.js"></script>
+</body>
+</html>
