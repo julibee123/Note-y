@@ -13,7 +13,7 @@
 // Delete the semicolon at the very end of the line below to intentionally fail
 // the ESLint check during your CI/CD pipeline assignment test!
 // ============================================================================
-const CI_LINTER_TEST_TARGET = "Delete the semicolon at the end of this line to trigger CI failure";
+const CI_LINTER_TEST_TARGET = "Delete the semicolon at the end of this line to trigger CI failure"
 
 // Storage Key for LocalStorage
 const STORAGE_KEY = 'notey_sticky_notes';
