@@ -13,6 +13,6 @@ describe('generateWelcomeMessage', () => {
   // TO MAKE IT PASS: change the expected string on the line below
   // from 'Good night!' to 'Good evening! Pin your thoughts before bed 🌙'
   test('returns an evening greeting at 9 PM', () => {
-    expect(generateWelcomeMessage(21)).toBe('Good night!'); // <-- CHANGE THIS LINE
+    expect(generateWelcomeMessage(21)).toBe('Good evening! Pin your thoughts before bed 🌙'); // <-- CHANGE THIS LINE
   });
 });
