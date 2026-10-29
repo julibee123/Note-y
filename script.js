@@ -13,7 +13,7 @@
 // Delete the semicolon at the very end of the line below to intentionally fail
 // the ESLint check during your CI/CD pipeline assignment test!
 // ============================================================================
-const CI_LINTER_TEST_TARGET = "Delete the semicolon at the end of this line to trigger CI failure"
+const CI_LINTER_TEST_TARGET = "Delete the semicolon at the end of this line to trigger CI failure";
 
 // Storage Key for LocalStorage
 const STORAGE_KEY = 'notey_sticky_notes';
@@ -284,9 +284,30 @@ function updateCreatorBackground(color) {
 }
 
 /**
+ * Pure function: builds a time-of-day greeting for the board subtitle.
+ * @param {number} hour - Hour of the day (0-23).
+ * @returns {string} Welcome message.
+ */
+function generateWelcomeMessage(hour) {
+  if (hour >= 5 && hour < 12) {
+    return 'Good morning! Pin your first thought of the day 🌅';
+  }
+  if (hour >= 12 && hour < 18) {
+    return 'Good afternoon! Keep your memories on the board ☀️';
+  }
+  return 'Good evening! Pin your thoughts before bed 🌙';
+}
+
+/**
  * Initialize event listeners on page load.
  */
 function init() {
+  // Show a time-based welcome message in the header
+  const welcomeEl = document.getElementById('welcome-message');
+  if (welcomeEl) {
+    welcomeEl.textContent = generateWelcomeMessage(new Date().getHours());
+  }
+
   // Save button click
   saveBtn.addEventListener('click', handleSaveNote);
 
@@ -317,3 +338,9 @@ function init() {
 
 // Attach init handler when DOM is ready
 document.addEventListener('DOMContentLoaded', init);
+
+// Safe CommonJS export for Jest (ignored in the browser)
+/* global module */
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = { generateWelcomeMessage };
+}

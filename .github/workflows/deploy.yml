@@ -44,12 +44,34 @@ jobs:
         run: npm run lint
 
   # -------------------------------------------------------------
-  # Job 2: Deploy - Publishes static site to GitHub Pages
-  # Strictly depends on 'lint' job passing!
+  # Job 2: Test - Runs Jest unit tests after lint passes
+  # -------------------------------------------------------------
+  test:
+    name: Run Jest Tests
+    needs: lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Jest
+        run: npm test
+
+  # -------------------------------------------------------------
+  # Job 3: Deploy - Publishes static site to GitHub Pages
+  # Strictly depends on BOTH 'lint' and 'test' jobs passing!
   # -------------------------------------------------------------
   deploy:
     name: Deploy to GitHub Pages
-    needs: lint
+    needs: [lint, test]
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
